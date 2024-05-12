@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import ru.mirea.carservicebackend.dto.UserDto;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -54,4 +55,45 @@ public class User {
 
     @OneToMany()
     private List<Order> orders = new ArrayList<>();
+
+    public UserDto toDto() {
+        return new UserDto(
+                id,
+                role,
+                name,
+                surname,
+                email,
+                phone,
+                cars.stream().map(car ->
+                        new UserDto.UserCarDto(
+                                car.getId(),
+                                car.getVin(),
+                                new UserDto.UserCarDto.UserCarModelDto(
+                                        car.getModel().getId(),
+                                        car.getModel().getName()
+                                ),
+                                new UserDto.UserCarDto.UserCarBrandDto(
+                                        car.getModel().getBrand().getId(),
+                                        car.getModel().getBrand().getName()
+                                ),
+                                car.getManufactureYear()
+                        )
+                ).toList(),
+                orders.stream().map(order ->
+                        new UserDto.UserOrderDto(
+                                order.getId(),
+                                order.services.stream().map(service ->
+                                        new UserDto.UserOrderDto.UserOrderServiceDto(
+                                                service.getId(),
+                                                service.getName(),
+                                                service.getPrice()
+                                        )
+                                ).toList(),
+                                order.getState(),
+                                order.getCreationDate(),
+                                order.getFinishedDate()
+                        )
+                ).toList()
+        );
+    }
 }

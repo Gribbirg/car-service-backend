@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import ru.mirea.carservicebackend.dto.ServiceDto;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,6 +37,32 @@ public class Service {
     @JoinColumn(name = "car_model_id", insertable = false, updatable = false)
     private CarModel carModel;
 
-    @OneToMany()
+    @ManyToMany
+    @JoinTable(
+            name = "orders_services",
+            joinColumns = @JoinColumn(name = "service_id"),
+            inverseJoinColumns = @JoinColumn(name = "order_id")
+    )
     private List<Order> orders = new ArrayList<>();
+
+    public ServiceDto toDto() {
+        return new ServiceDto(
+                id,
+                name,
+                duration,
+                price,
+                new ServiceDto.ServiceCarModelDto(
+                        carModel.getId(),
+                        carModel.getName()
+                ),
+                orders.stream().map(order ->
+                        new ServiceDto.ServiceOrderDto(
+                                order.getId(),
+                                order.getState(),
+                                order.getCreationDate(),
+                                order.getFinishedDate()
+                        )
+                ).toList()
+        );
+    }
 }

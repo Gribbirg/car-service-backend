@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import ru.mirea.carservicebackend.dto.CarModelDto;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,4 +36,29 @@ public class CarModel {
 
     @OneToMany
     private List<Service> services = new ArrayList<>();
+
+    public CarModelDto toDto() {
+        return new CarModelDto(
+                id,
+                name,
+                new CarModelDto.CarModelBrandDto(
+                        brand.getId(),
+                        brand.getName()
+                ),
+                cars.stream().map(car -> new CarModelDto.CarModelCarDto(
+                        car.getId(),
+                        car.getVin(),
+                        car.getOwnerId(),
+                        car.getManufactureYear(),
+                        car.getOrders().size()
+                )).toList(),
+                services.stream().map(service -> new CarModelDto.CarModelServiceDto(
+                        service.getId(),
+                        service.getName(),
+                        service.getDuration(),
+                        service.getPrice(),
+                        service.getOrders().size()
+                )).toList()
+        );
+    }
 }

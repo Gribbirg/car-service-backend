@@ -116,6 +116,7 @@ CREATE TABLE IF NOT EXISTS services
     price
         INTEGER
 );
+
 CREATE TABLE IF NOT EXISTS orders
 (
     id
@@ -146,4 +147,30 @@ CREATE TABLE IF NOT EXISTS orders
         DATE,
     finished_date
         DATE
+);
+
+CREATE TABLE IF NOT EXISTS orders_services
+(
+    id
+        SERIAL
+        NOT
+            NULL
+        PRIMARY
+            KEY,
+    service_id
+        INTEGER
+        NOT
+            NULL
+        CONSTRAINT
+            orders_services_service_fk
+            REFERENCES
+                services,
+    order_id
+        INTEGER
+        NOT
+            NULL
+        CONSTRAINT
+            orders_services_order_fk
+            REFERENCES
+                orders
 )

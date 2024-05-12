@@ -5,8 +5,11 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import ru.mirea.carservicebackend.dto.OrderDto;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Setter
 @Getter
@@ -52,4 +55,49 @@ public class Order {
 
     @Column(name = "finished_date")
     private Date finishedDate;
+
+    @ManyToMany
+    @JoinTable(
+            name = "orders_services",
+            joinColumns = @JoinColumn(name = "order_id"),
+            inverseJoinColumns = @JoinColumn(name = "service_id")
+    )
+    List<Service> services = new ArrayList<>();
+
+    public OrderDto toDto() {
+        return new OrderDto(
+                id,
+                new OrderDto.OrderCarDto(
+                        car.getId(),
+                        car.getVin(),
+                        new OrderDto.OrderCarDto.OrderCarModelDto(
+                                car.getModel().getId(),
+                                car.getModel().getName()
+                        ),
+                        new OrderDto.OrderCarDto.OrderCarBrandDto(
+                                car.getModel().getBrand().getId(),
+                                car.getModel().getBrand().getName()
+                        ),
+                        car.getManufactureYear()
+                ),
+                new OrderDto.OrderClientDto(
+                        client.getId(),
+                        client.getRole(),
+                        client.getName(),
+                        client.getSurname(),
+                        client.getEmail(),
+                        client.getPhone()
+                ),
+                services.stream().map(service -> new OrderDto.OrderServiceDto(
+                        service.getId(),
+                        service.getName(),
+                        service.getDuration(),
+                        service.getPrice()
+                )).toList(),
+                state,
+                creationDate,
+                finishedDate,
+                services.stream().mapToInt(Service::getPrice).sum()
+        );
+    }
 }
