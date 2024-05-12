@@ -2,7 +2,7 @@ DO
 $$
     BEGIN
         CREATE TYPE user_roles AS ENUM ('client', 'employee', 'admin');
-        CREATE TYPE order_state AS ENUM ('created', 'accepted', 'started', 'finished', 'closed');
+        CREATE TYPE order_state AS ENUM ('created', 'accepted', 'started', 'finished', 'closed', 'failed');
     EXCEPTION
         WHEN duplicate_object THEN null;
     END
@@ -23,6 +23,8 @@ CREATE TABLE IF NOT EXISTS users
     surname
         VARCHAR,
     email
+        VARCHAR,
+    phone
         VARCHAR,
     password
         VARCHAR,
@@ -101,8 +103,8 @@ CREATE TABLE IF NOT EXISTS services
             KEY,
     name
         VARCHAR,
-    duration
-        INTERVAL,
+    duration_days
+        INTEGER,
     car_model_id
         INTEGER
         NOT

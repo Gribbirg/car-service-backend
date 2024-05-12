@@ -14,8 +14,8 @@ import java.util.List;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "car_models")
-public class CarModel {
+@Table(name = "services")
+public class Service {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -23,16 +23,19 @@ public class CarModel {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "brand_id")
-    private Long brandId;
+    @Column(name = "duration_days")
+    private Integer duration;
+
+    @Column(name = "price")
+    private Integer price;
+
+    @Column(name = "car_model_id")
+    private Long carModelId;
 
     @ManyToOne()
-    @JoinColumn(name = "brand_id", insertable = false, updatable = false)
-    private CarBrand brand;
+    @JoinColumn(name = "car_model_id", insertable = false, updatable = false)
+    private CarModel carModel;
 
-    @OneToMany
-    private List<Car> cars = new ArrayList<>();
-
-    @OneToMany
-    private List<Service> services = new ArrayList<>();
+    @OneToMany()
+    private List<Order> orders = new ArrayList<>();
 }
