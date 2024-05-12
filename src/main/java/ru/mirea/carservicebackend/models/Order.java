@@ -33,7 +33,7 @@ public class Order {
     private Long id;
 
     @Column(name = "client_id")
-    private Long brandId;
+    private Long clientId;
 
     @ManyToOne()
     @JoinColumn(name = "client_id", insertable = false, updatable = false)

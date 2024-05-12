@@ -50,11 +50,25 @@ public class User {
     @Column(name = "blocked")
     private Boolean blocked;
 
-    @OneToMany
+    @OneToMany(mappedBy = "ownerId")
     private List<Car> cars = new ArrayList<>();
 
-    @OneToMany()
+    @OneToMany(mappedBy = "clientId")
     private List<Order> orders = new ArrayList<>();
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", role=" + role +
+                ", name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                ", email='" + email + '\'' +
+                ", phone='" + phone + '\'' +
+                ", password='" + password + '\'' +
+                ", blocked=" + blocked +
+                '}';
+    }
 
     public UserDto toDto() {
         return new UserDto(

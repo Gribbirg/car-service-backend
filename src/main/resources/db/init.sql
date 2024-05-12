@@ -1,9 +1,14 @@
 DO
 $$
     BEGIN
+
         CREATE TYPE user_roles AS ENUM ('client', 'employee', 'admin');
         CREATE TYPE order_state AS ENUM ('created', 'accepted', 'started', 'finished', 'closed', 'failed');
+
+        CREATE CAST (varchar AS user_roles) WITH INOUT AS IMPLICIT;
+        CREATE CAST (varchar AS order_state) WITH INOUT AS IMPLICIT;
     EXCEPTION
+
         WHEN duplicate_object THEN null;
     END
 $$;
