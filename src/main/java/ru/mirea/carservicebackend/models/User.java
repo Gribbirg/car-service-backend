@@ -50,7 +50,7 @@ public class User {
     @Column(name = "blocked")
     private Boolean blocked;
 
-    @OneToMany(mappedBy = "ownerId")
+    @OneToMany(mappedBy = "ownerId", fetch = FetchType.EAGER)
     private List<Car> cars = new ArrayList<>();
 
     @OneToMany(mappedBy = "clientId")

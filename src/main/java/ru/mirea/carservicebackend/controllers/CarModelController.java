@@ -8,6 +8,7 @@ import ru.mirea.carservicebackend.dto.CarModelDto;
 import ru.mirea.carservicebackend.services.CarService;
 
 import java.util.List;
+import java.util.Objects;
 
 @Controller
 @RequiredArgsConstructor
@@ -18,13 +19,13 @@ public class CarModelController {
 
     @GetMapping()
     @ResponseBody
-    public List<CarBrandDto> getCarBrands(@RequestParam String name) {
-        return carService.getBrandsByName(name);
+    public List<CarBrandDto> getCarBrands(@RequestParam(defaultValue = "") String name) {
+        return carService.getBrandsByName(Objects.equals(name, "") ? null : name);
     }
 
     @GetMapping("/{brandId}")
     @ResponseBody
-    public List<CarModelDto> getCarModels(@PathVariable Long brandId, @RequestParam String name) {
-        return carService.getModelsByName(brandId, name);
+    public List<CarModelDto> getCarModels(@PathVariable Long brandId, @RequestParam(defaultValue = "") String name) {
+        return carService.getModelsByName(brandId, Objects.equals(name, "") ? null : name);
     }
 }

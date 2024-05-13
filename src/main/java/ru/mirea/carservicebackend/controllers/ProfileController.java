@@ -10,6 +10,7 @@ import ru.mirea.carservicebackend.models.Car;
 import ru.mirea.carservicebackend.models.Order;
 import ru.mirea.carservicebackend.models.User;
 import ru.mirea.carservicebackend.services.CarService;
+import ru.mirea.carservicebackend.services.OrderService;
 import ru.mirea.carservicebackend.services.ProfileService;
 
 import java.util.List;
@@ -22,6 +23,7 @@ public class ProfileController {
 
     private final ProfileService profileService;
     private final CarService carService;
+    private final OrderService orderService;
 
     @GetMapping
     @ResponseBody
@@ -32,7 +34,8 @@ public class ProfileController {
     @GetMapping("/cars")
     @ResponseBody
     public List<CarDto> getUserCars() {
-        return profileService.getUserCars();
+        Long userId = profileService.getCurrentUserId();
+        return carService.getCarsByOwnerId(userId);
     }
 
     @GetMapping("/cars/{id}")
@@ -59,7 +62,8 @@ public class ProfileController {
     @GetMapping("/orders")
     @ResponseBody
     public List<OrderDto> getUserOrders() {
-        return profileService.getUserOrders();
+        Long userId = profileService.getCurrentUserId();
+        return orderService.getOrdersByUserId(userId);
     }
 
     @PostMapping("/update")
@@ -68,9 +72,9 @@ public class ProfileController {
         profileService.updateUser(user.getName(), user.getSurname(), user.getEmail(), user.getPhone());
     }
 
-    @PostMapping("/orders")
+    @PostMapping("/orders/{carId}")
     @ResponseBody
-    public void addOrder(@RequestParam Order order, @RequestParam List<Long> servicesIds) {
-        profileService.addOrder(order, servicesIds);
+    public void addOrder(@PathVariable Long carId, @RequestBody List<Long> servicesIds) {
+        profileService.addOrder(carId, servicesIds);
     }
 }

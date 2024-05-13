@@ -11,11 +11,11 @@ import ru.mirea.carservicebackend.dto.UserDto;
 import ru.mirea.carservicebackend.models.Car;
 import ru.mirea.carservicebackend.models.Order;
 import ru.mirea.carservicebackend.models.User;
-import ru.mirea.carservicebackend.repositories.CarRepository;
 import ru.mirea.carservicebackend.repositories.OrderRepository;
 import ru.mirea.carservicebackend.repositories.ServiceRepository;
 import ru.mirea.carservicebackend.repositories.UserRepository;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -49,7 +49,10 @@ public class ProfileServiceImpl implements ProfileService {
     }
 
     @Override
-    public void addOrder(Order order, List<Long> servicesIds) {
+    public void addOrder(Long carId, List<Long> servicesIds) {
+        Order order = new Order();
+        order.setCarId(carId);
+        order.setCreationDate(new Date());
         order.setClientId(getCurrentUserId());
         order.setServices(serviceRepository.findAllById(servicesIds));
         orderRepository.save(order);

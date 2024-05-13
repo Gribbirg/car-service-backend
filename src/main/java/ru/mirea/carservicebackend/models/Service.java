@@ -37,7 +37,7 @@ public class Service {
     @JoinColumn(name = "car_model_id", insertable = false, updatable = false)
     private CarModel carModel;
 
-    @ManyToMany
+    @ManyToMany()
     @JoinTable(
             name = "orders_services",
             joinColumns = @JoinColumn(name = "service_id"),

@@ -33,6 +33,21 @@ public class AuthServiceImpl implements AuthService, UserDetailsService {
     }
 
     @Override
+    public void setUserRole(Long userId, User.Role role) {
+        log.info("Set role \"{}\" for user with id {}", role.name(), userId);
+        User user = userRepository.findById(userId).orElseThrow();
+        user.setRole(role);
+        userRepository.save(user);
+    }
+
+    @Override
+    public void setUserBlock(Long userId, Boolean isBocked) {
+        User user = userRepository.findById(userId).orElseThrow();
+        user.setBlocked(isBocked);
+        userRepository.save(user);
+    }
+
+    @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userRepository.findByEmail(username).orElse(null);
         if (user == null) {

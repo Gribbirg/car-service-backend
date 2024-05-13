@@ -19,11 +19,16 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
+                .cors(AbstractHttpConfigurer::disable)
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth ->
                         auth
-                                .requestMatchers("/auth/**").permitAll()
-                                .requestMatchers("/profile/**").authenticated()
+                                .requestMatchers("/auth**").permitAll()
+                                .requestMatchers("/car_brands**").permitAll()
+                                .requestMatchers("/services**").permitAll()
+                                .requestMatchers("/profile**").authenticated()
+                                .requestMatchers("/employee**").hasRole("employee")
+                                .requestMatchers("/admin**").hasRole("admin")
                                 .anyRequest().authenticated()
                 )
                 .formLogin(AbstractAuthenticationFilterConfigurer::permitAll);

@@ -2,6 +2,7 @@ package ru.mirea.carservicebackend.config;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import ru.mirea.carservicebackend.models.User;
@@ -19,6 +20,9 @@ public class AppUserDetails implements org.springframework.security.core.userdet
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<GrantedAuthority> list = new ArrayList<>();
         list.add(new SimpleGrantedAuthority(user.getRole().name()));
+        if (user.getRole() == User.Role.admin) {
+            list.add(new SimpleGrantedAuthority(User.Role.employee.name()));
+        }
         return list;
     }
 

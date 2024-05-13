@@ -27,14 +27,14 @@ public class CarModel {
     @Column(name = "brand_id")
     private Long brandId;
 
-    @ManyToOne()
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "brand_id", insertable = false, updatable = false)
     private CarBrand brand;
 
-    @OneToMany
+    @OneToMany(mappedBy = "modelId")
     private List<Car> cars = new ArrayList<>();
 
-    @OneToMany
+    @OneToMany(mappedBy = "carModelId")
     private List<Service> services = new ArrayList<>();
 
     public CarModelDto toDto() {

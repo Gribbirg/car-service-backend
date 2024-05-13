@@ -51,6 +51,11 @@ public class CarServiceImpl implements CarService {
     }
 
     @Override
+    public void addBrand(CarBrand brand) {
+        brandRepository.save(brand);
+    }
+
+    @Override
     public CarModelDto getModel(Long id) {
         return modelRepository.findById(id).orElseThrow().toDto();
     }
@@ -60,5 +65,15 @@ public class CarServiceImpl implements CarService {
         Specification<CarModel> filters = Specification
                 .where(name == null ? brandEquals(brandId) : nameLikeWithBrand(brandId, name));
         return modelRepository.findAll(filters).stream().map(CarModel::toDto).toList();
+    }
+
+    @Override
+    public void addModel(CarModel model) {
+        modelRepository.save(model);
+    }
+
+    @Override
+    public List<CarDto> getCarsByOwnerId(Long ownerId) {
+        return carRepository.findAllByOwnerId(ownerId).stream().map(Car::toDto).toList();
     }
 }

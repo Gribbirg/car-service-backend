@@ -24,7 +24,7 @@ public class CarBrand {
     @Column(name = "name")
     private String name;
 
-    @OneToMany
+    @OneToMany(mappedBy = "brandId")
     private List<CarModel> models = new ArrayList<>();
 
     public CarBrandDto toDto() {
