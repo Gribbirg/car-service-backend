@@ -10,6 +10,9 @@ import ru.mirea.carservicebackend.dto.UserDto;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The type User.
+ */
 @Setter
 @Getter
 @Entity
@@ -18,9 +21,21 @@ import java.util.List;
 @Table(name = "users")
 public class User {
 
+    /**
+     * The enum Role.
+     */
     public enum Role {
+        /**
+         * Client role.
+         */
         client,
+        /**
+         * Employee role.
+         */
         employee,
+        /**
+         * Admin role.
+         */
         admin
     }
 
@@ -70,6 +85,11 @@ public class User {
                 '}';
     }
 
+    /**
+     * To dto user dto.
+     *
+     * @return the user dto
+     */
     public UserDto toDto() {
         return new UserDto(
                 id,

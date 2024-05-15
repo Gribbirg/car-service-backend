@@ -9,11 +9,17 @@ import ru.mirea.carservicebackend.models.Order;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * The type Service dto.
+ */
 @Setter
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
 public class ServiceDto {
+    /**
+     * The type Service car model dto.
+     */
     @Setter
     @Getter
     @AllArgsConstructor
@@ -23,6 +29,9 @@ public class ServiceDto {
         private String name;
     }
 
+    /**
+     * The type Service order dto.
+     */
     @Setter
     @Getter
     @AllArgsConstructor

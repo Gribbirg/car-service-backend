@@ -8,9 +8,15 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import ru.mirea.carservicebackend.config.AppUserDetails;
+import ru.mirea.carservicebackend.dto.UserDto;
 import ru.mirea.carservicebackend.models.User;
 import ru.mirea.carservicebackend.repositories.UserRepository;
 
+import java.util.List;
+
+/**
+ * The type Auth service.
+ */
 @Service
 @RequiredArgsConstructor
 @Slf4j
@@ -45,6 +51,11 @@ public class AuthServiceImpl implements AuthService, UserDetailsService {
         User user = userRepository.findById(userId).orElseThrow();
         user.setBlocked(isBocked);
         userRepository.save(user);
+    }
+
+    @Override
+    public List<UserDto> getAllUsers() {
+        return userRepository.findAll().stream().map(User::toDto).toList();
     }
 
     @Override

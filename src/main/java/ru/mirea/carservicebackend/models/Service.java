@@ -10,6 +10,9 @@ import ru.mirea.carservicebackend.dto.ServiceDto;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The type Service.
+ */
 @Setter
 @Getter
 @Entity
@@ -45,6 +48,11 @@ public class Service {
     )
     private List<Order> orders = new ArrayList<>();
 
+    /**
+     * To dto service dto.
+     *
+     * @return the service dto
+     */
     public ServiceDto toDto() {
         return new ServiceDto(
                 id,

@@ -8,6 +8,9 @@ import ru.mirea.carservicebackend.repositories.ServiceRepository;
 import java.util.List;
 
 
+/**
+ * The type Service service.
+ */
 @Service
 @RequiredArgsConstructor
 public class ServiceServiceImpl implements ServiceService {

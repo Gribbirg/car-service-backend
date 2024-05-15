@@ -7,11 +7,17 @@ import lombok.Setter;
 
 import java.util.List;
 
+/**
+ * The type Car model dto.
+ */
 @Setter
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
 public class CarModelDto {
+    /**
+     * The type Car model brand dto.
+     */
     @Setter
     @Getter
     @AllArgsConstructor
@@ -21,6 +27,9 @@ public class CarModelDto {
         private String name;
     }
 
+    /**
+     * The type Car model car dto.
+     */
     @Setter
     @Getter
     @AllArgsConstructor
@@ -33,6 +42,9 @@ public class CarModelDto {
         private Integer ordersCount;
     }
 
+    /**
+     * The type Car model service dto.
+     */
     @Setter
     @Getter
     @AllArgsConstructor

@@ -7,11 +7,17 @@ import lombok.Setter;
 
 import java.util.List;
 
+/**
+ * The type Car brand dto.
+ */
 @Setter
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
 public class CarBrandDto {
+    /**
+     * The type Car brand model dto.
+     */
     @Setter
     @Getter
     @AllArgsConstructor

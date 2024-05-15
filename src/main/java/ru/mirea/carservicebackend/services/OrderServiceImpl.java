@@ -9,6 +9,9 @@ import ru.mirea.carservicebackend.repositories.OrderRepository;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * The type Order service.
+ */
 @Service
 @RequiredArgsConstructor
 public class OrderServiceImpl implements OrderService {
@@ -27,5 +30,10 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public List<OrderDto> getOrdersByUserId(Long userId) {
         return orderRepository.findAllByClientId(userId).stream().map(Order::toDto).toList();
+    }
+
+    @Override
+    public List<OrderDto> getAllOrders() {
+        return orderRepository.findAll().stream().map(Order::toDto).toList();
     }
 }

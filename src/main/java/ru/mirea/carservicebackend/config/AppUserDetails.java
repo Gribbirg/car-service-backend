@@ -11,6 +11,9 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+/**
+ * The type App user details.
+ */
 @Getter
 @AllArgsConstructor
 public class AppUserDetails implements org.springframework.security.core.userdetails.UserDetails {

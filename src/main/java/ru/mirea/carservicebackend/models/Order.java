@@ -11,6 +11,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * The type Order.
+ */
 @Setter
 @Getter
 @Entity
@@ -19,12 +22,33 @@ import java.util.List;
 @Table(name = "orders")
 public class Order {
 
+    /**
+     * The enum State.
+     */
     public enum State {
+        /**
+         * Created state.
+         */
         created,
+        /**
+         * Accepted state.
+         */
         accepted,
+        /**
+         * Started state.
+         */
         started,
+        /**
+         * Finished state.
+         */
         finished,
+        /**
+         * Closed state.
+         */
         closed,
+        /**
+         * Failed state.
+         */
         failed
     }
 
@@ -56,6 +80,9 @@ public class Order {
     @Column(name = "finished_date")
     private Date finishedDate;
 
+    /**
+     * The Services.
+     */
     @ManyToMany
     @JoinTable(
             name = "orders_services",
@@ -64,6 +91,11 @@ public class Order {
     )
     List<Service> services = new ArrayList<>();
 
+    /**
+     * To dto order dto.
+     *
+     * @return the order dto
+     */
     public OrderDto toDto() {
         return new OrderDto(
                 id,

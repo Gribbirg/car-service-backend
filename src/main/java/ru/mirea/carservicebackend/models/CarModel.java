@@ -10,6 +10,9 @@ import ru.mirea.carservicebackend.dto.CarModelDto;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The type Car model.
+ */
 @Setter
 @Getter
 @Entity
@@ -37,6 +40,11 @@ public class CarModel {
     @OneToMany(mappedBy = "carModelId")
     private List<Service> services = new ArrayList<>();
 
+    /**
+     * To dto car model dto.
+     *
+     * @return the car model dto
+     */
     public CarModelDto toDto() {
         return new CarModelDto(
                 id,

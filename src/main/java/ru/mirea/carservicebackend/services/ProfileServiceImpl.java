@@ -18,6 +18,9 @@ import ru.mirea.carservicebackend.repositories.UserRepository;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * The type Profile service.
+ */
 @Service
 @RequiredArgsConstructor
 @Slf4j

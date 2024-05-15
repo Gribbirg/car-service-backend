@@ -10,16 +10,25 @@ import ru.mirea.carservicebackend.models.User;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * The type Order dto.
+ */
 @Setter
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
 public class OrderDto {
+    /**
+     * The type Order car dto.
+     */
     @Setter
     @Getter
     @AllArgsConstructor
     @NoArgsConstructor
     public static class OrderCarDto {
+        /**
+         * The type Order car model dto.
+         */
         @Setter
         @Getter
         @AllArgsConstructor
@@ -29,6 +38,9 @@ public class OrderDto {
             private String name;
         }
 
+        /**
+         * The type Order car brand dto.
+         */
         @Setter
         @Getter
         @AllArgsConstructor
@@ -45,6 +57,9 @@ public class OrderDto {
         private Integer manufactureYear;
     }
 
+    /**
+     * The type Order client dto.
+     */
     @Setter
     @Getter
     @AllArgsConstructor
@@ -58,6 +73,9 @@ public class OrderDto {
         private String phone;
     }
 
+    /**
+     * The type Order service dto.
+     */
     @Setter
     @Getter
     @AllArgsConstructor

@@ -20,6 +20,9 @@ import static ru.mirea.carservicebackend.specifications.CarBrandSpecification.na
 import static ru.mirea.carservicebackend.specifications.CarModelSpecification.brandEquals;
 import static ru.mirea.carservicebackend.specifications.CarModelSpecification.nameLikeWithBrand;
 
+/**
+ * The type Car service.
+ */
 @Service
 @RequiredArgsConstructor
 @Slf4j

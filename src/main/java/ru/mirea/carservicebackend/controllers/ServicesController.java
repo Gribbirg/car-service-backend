@@ -11,12 +11,21 @@ import ru.mirea.carservicebackend.services.ServiceService;
 
 import java.util.List;
 
+/**
+ * The type Services controller.
+ */
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/services")
 public class ServicesController {
     private final ServiceService serviceService;
 
+    /**
+     * Gets services.
+     *
+     * @param carModelIdStr the car model id str
+     * @return the services
+     */
     @GetMapping()
     @ResponseBody
     public List<ServiceDto> getServices(@RequestParam(defaultValue = "-1L") String carModelIdStr) {

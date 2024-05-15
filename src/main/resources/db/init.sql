@@ -15,26 +15,14 @@ $$;
 
 CREATE TABLE IF NOT EXISTS users
 (
-    id
-        SERIAL
-        NOT
-            NULL
-        PRIMARY
-            KEY,
-    role
-        user_roles,
-    name
-        VARCHAR,
-    surname
-        VARCHAR,
-    email
-        VARCHAR,
-    phone
-        VARCHAR,
-    password
-        VARCHAR,
-    blocked
-        BOOLEAN
+    id SERIAL NOT NULL PRIMARY KEY,
+    role user_roles,
+    name VARCHAR,
+    surname VARCHAR,
+    email VARCHAR,
+    phone VARCHAR,
+    password VARCHAR,
+    blocked BOOLEAN
 );
 
 CREATE TABLE IF NOT EXISTS car_brands
